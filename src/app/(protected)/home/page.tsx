@@ -153,8 +153,8 @@ export default function Home() {
                     <div className="flex gap-2 w-full max-w-xs mt-4 justify-center">
                         <DepositButton onSuccess={incrementBalance} />
 
-                        {/* Degen-news cat button – wrapped in a relative container so the chat bubble can be positioned against it */}
-                        <div className="relative">
+                        {/* Degen-news cat button – wrapper now has fixed width to balance layout */}
+                        <div className="relative w-[120px] flex justify-center">
                             <button
                                 onClick={toggleChat}
                                 className="rounded-full border-2 border-[var(--foreground)] p-1 bg-[var(--background)] flex items-center justify-center"
@@ -166,7 +166,7 @@ export default function Home() {
                             {/* Pixel-style chat bubble – now anchored to the cat button instead of the viewport centre */}
                             {showChat && (
                                 <div
-                                    className="absolute right-full -mr-3 z-50 bg-[var(--foreground)] border-4 border-[gray] p-4 pointer-events-auto w-max max-w-[250px] whitespace-normal"
+                                    className="absolute left-1/2 -translate-x-1/2 z-50 bg-[var(--foreground)] border-4 border-[gray] p-4 pointer-events-auto w-max max-w-[250px] whitespace-normal"
                                     style={{ bottom: "calc(100% + 10px)", fontFamily: "var(--font-press-start)" }}
                                 >
                                     <p
@@ -176,8 +176,8 @@ export default function Home() {
                                         {chatMessage}
                                     </p>
 
-                                    {/* Bubble tail – now anchored to the right edge */}
-                                    <div className="absolute -bottom-[9px] right-2 w-4 h-4 bg-[var(--foreground)] border-l-4 border-b-4 border-[gray] rotate-45" />
+                                    {/* Bubble tail – centered under the bubble */}
+                                    <div className="absolute -bottom-[9px] left-1/2 -translate-x-1/2 w-4 h-4 bg-[var(--foreground)] border-l-4 border-b-4 border-[gray] rotate-45" />
                                 </div>
                             )}
                         </div>
