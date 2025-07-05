@@ -45,6 +45,7 @@ export default function Home() {
             <Page.Header className="p-0 relative">
                 {isZeroBalance ? (
                     <Player
+                    className="absolute left-5 top-8"
                       src="/nyan.json"   // lives in /public, so this path is fine
                       autoplay
                       loop
@@ -97,7 +98,7 @@ export default function Home() {
                       src="/nyan.json"   // lives in /public, so this path is fine
                       autoplay
                       loop
-                      style={{ width: 80, height: 80 }}  // tailwind classes also OK
+                      style={{ width: 200, height: 200 }}  // tailwind classes also OK
                     />
 
                     <h3 className="text-sm -mt-1 -mb-1">Your Balance</h3>
