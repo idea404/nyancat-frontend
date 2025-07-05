@@ -16,7 +16,7 @@ export default async function Home() {
         <img
           src="https://www.pngplay.com/wp-content/uploads/7/Nyan-Cat-Pixel-Art-Transparent-Free-PNG.png"
           alt="nyan cat"
-          className="absolute left-3 top-3 w-10 h-auto"
+          className="absolute left-3 top-3 w-30 h-auto"
         />
         <TopBar
           title=""
