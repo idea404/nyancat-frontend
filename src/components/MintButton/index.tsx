@@ -18,7 +18,12 @@ const VAULT_ADDRESS = (process.env.NEXT_PUBLIC_VAULT_ADDRESS ?? "0xVAULT_ADDRESS
 // Flag that allows us to short-circuit on-chain confirmations (demo/stub mode)
 const DEMO_MODE = true;
 
-export const MintButton = () => {
+interface MintButtonProps {
+  onSuccess?: () => void;
+  className?: string;
+}
+
+export const MintButton = ({ onSuccess, className }: MintButtonProps) => {
   const { data: session } = useSession();
 
   const [buttonState, setButtonState] = useState<
@@ -101,6 +106,7 @@ export const MintButton = () => {
 
           // Update UI – skip polling in demo mode
           setButtonState("success");
+          onSuccess?.();
           setTimeout(() => setButtonState(undefined), 3000);
         } else {
           console.error("[DEMO] signMessage failed", finalPayload);
@@ -161,7 +167,7 @@ export const MintButton = () => {
         disabled={buttonState === "pending"}
         size="lg"
         variant="primary"
-        className="w-max mx-auto border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-6 py-2 rounded-lg transition-colors hover:!bg-[var(--highlight)] hover:!border-[var(--highlight)] hover:!text-[var(--background)]"
+        className={`w-full border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-6 py-2 rounded-lg transition-colors hover:!bg-[var(--highlight)] hover:!border-[var(--highlight)] hover:!text-[var(--background)] ${className ?? ""}`}
         style={{ fontFamily: 'var(--font-press-start)' }}
       >
         Deposit Now
