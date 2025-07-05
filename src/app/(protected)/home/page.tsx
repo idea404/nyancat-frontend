@@ -1,16 +1,24 @@
-import { auth } from '@/auth';
-import { Page } from '@/components/PageLayout';
-// import { Pay } from '@/components/Pay';
-// import { Transaction } from '@/components/Transaction';
-// import { UserInfo } from '@/components/UserInfo';
-// import { Verify } from '@/components/Verify';
-// import { ViewPermissions } from '@/components/ViewPermissions';
-import { Marble, TopBar } from '@worldcoin/mini-apps-ui-kit-react';
-import MintButton from '@/components/MintButton';
-import RainbowText from '@/components/RainbowText';
+"use client";
 
-export default async function Home() {
-  const session = await auth();
+import { useState } from 'react';
+import { useSession } from 'next-auth/react';
+import { Page } from '@/components/PageLayout';
+import { Marble, TopBar, Button } from '@worldcoin/mini-apps-ui-kit-react';
+import RainbowText from '@/components/RainbowText';
+import DepositButton from '@/components/DepositButton';
+
+export default function Home() {
+  const { data: session } = useSession();
+  const [balance, setBalance] = useState<number>(0);
+
+  const incrementBalance = () => setBalance((prev) => prev + 100);
+
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
   return (
     <>
@@ -41,15 +49,28 @@ export default async function Home() {
             Neutral Yield AggregatioNal Compounding Algorithmic Treasury
           </p>
         </div>
-        <p className="max-w-xs text-sm md:text-base">
-          Earn yield from advanced AI delta-neutral strategies throughout crypto
-        </p>
-        <div className="text-5xl md:text-6xl font-bold mb-0">
-          <RainbowText text="14.7%" />
+
+        <h2 className="text-base tracking-wide mt-4">Your Balance</h2>
+        <div className="text-5xl md:text-6xl font-bold">
+          {formatter.format(balance)}
         </div>
-        <p className="text-sm tracking-wide mt-0">Backtested APY</p>
-        <MintButton />
-        <button className="underline mt-2 text-sm">Learn More</button>
+        <p className="text-sm opacity-80">{balance.toLocaleString()} vyShares</p>
+
+        <div className="text-4xl font-bold mb-0">42.69%</div>
+        <p className="text-sm tracking-wide mt-0">YTD Return</p>
+
+        <div className="flex gap-4 mt-4">
+          <DepositButton onSuccess={incrementBalance} />
+          <Button
+            size="lg"
+            variant="tertiary"
+            disabled
+            className="w-max mx-auto border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-6 py-2 rounded-lg"
+            style={{ fontFamily: 'var(--font-press-start)' }}
+          >
+            Redeem
+          </Button>
+        </div>
       </Page.Main>
     </>
   );
