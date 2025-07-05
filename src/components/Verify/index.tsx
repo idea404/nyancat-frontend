@@ -22,7 +22,7 @@ export const Verify = () => {
     setButtonState('pending');
     setWhichVerification(verificationLevel);
     const result = await MiniKit.commandsAsync.verify({
-      action: 'test-action', // Make sure to create this in the developer portal -> incognito actions
+      action: 'verify',
       verification_level: verificationLevel,
     });
     console.log(result.finalPayload);
