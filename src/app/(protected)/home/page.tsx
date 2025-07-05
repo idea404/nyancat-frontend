@@ -7,6 +7,7 @@ import { Marble, TopBar, Button } from "@worldcoin/mini-apps-ui-kit-react";
 import RainbowText from "@/components/RainbowText";
 import DepositButton from "@/components/DepositButton";
 import MintButton from "@/components/MintButton";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 export default function Home() {
     const { data: session } = useSession();
@@ -43,10 +44,11 @@ export default function Home() {
             {/* Single Header with conditional content */}
             <Page.Header className="p-0 relative">
                 {isZeroBalance ? (
-                    <img
-                        src="https://www.pngplay.com/wp-content/uploads/7/Nyan-Cat-Pixel-Art-Transparent-Free-PNG.png"
-                        alt="nyan cat"
-                        className="absolute left-3 top-3 w-20 h-auto"
+                    <Player
+                      src="/nyan.lottie"   // lives in /public, so this path is fine
+                      autoplay
+                      loop
+                      style={{ width: 80, height: 80 }}  // tailwind classes also OK
                     />
                 ) : (
                     <div className="absolute left-5 top-8">
@@ -91,10 +93,11 @@ export default function Home() {
                 /* Balance screen */
                 <Page.Main className="flex flex-col items-center justify-center text-center mb-16 gap-4">
                     {/* Cat image where hero text was */}
-                    <img
-                        src="https://www.pngplay.com/wp-content/uploads/7/Nyan-Cat-Pixel-Art-Transparent-Free-PNG.png"
-                        alt="nyan cat"
-                        className="w-50 h-auto -mb-1"
+                    <Player
+                      src="/nyan.lottie"   // lives in /public, so this path is fine
+                      autoplay
+                      loop
+                      style={{ width: 80, height: 80 }}  // tailwind classes also OK
                     />
 
                     <h3 className="text-sm -mt-1 -mb-1">Your Balance</h3>
