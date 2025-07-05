@@ -44,7 +44,7 @@ export default function Home() {
             {balance !== 0 && (
                 <Page.Header className="p-0 relative">
                     {/* Rainbow title top-left */}
-                    <div className="absolute left-5 top-10">
+                    <div className="absolute left-5 top-8">
                         <RainbowText text="NYAnCAT" />
                     </div>
                     <TopBar
@@ -71,26 +71,13 @@ export default function Home() {
                             Neutral Yield AggregatioNal Compounding Algorithmic Treasury
                         </p>
                     </div>
-
-                    <h2 className="text-base tracking-wide mt-4">Your Balance</h2>
-                    <div className="text-5xl md:text-6xl font-bold">{formatter.format(balance)}</div>
-                    <p className="text-sm opacity-80">{balance.toLocaleString()} vyShares</p>
-
-                    <div className="text-4xl font-bold mb-0">42.69%</div>
-                    <p className="text-sm tracking-wide mt-0">YTD Return</p>
-
-                    <div className="flex gap-4 mt-4">
-                        <DepositButton onSuccess={incrementBalance} />
-                        <Button
-                            size="lg"
-                            variant="tertiary"
-                            disabled
-                            className="w-max mx-auto border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-6 py-2 rounded-lg"
-                            style={{ fontFamily: "var(--font-press-start)" }}
-                        >
-                            Redeem
-                        </Button>
+                    <p className="max-w-xs text-sm md:text-base">Earn yield from advanced AI delta-neutral strategies throughout crypto</p>
+                    <div className="text-5xl md:text-6xl font-bold mb-0">
+                        <RainbowText text="14.7%" />
                     </div>
+                    <p className="text-sm tracking-wide mt-0">Backtested APY</p>
+                    <DepositButton />
+                    <button className="underline mt-2 text-sm">Learn More</button>
                 </Page.Main>
             ) : (
                 /* Balance screen */
