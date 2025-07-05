@@ -149,9 +149,9 @@ export const MintButton = () => {
   return (
     <LiveFeedback
       label={{
-        failed: "Mint failed",
-        pending: "Mint pending",
-        success: "Mint successful",
+        failed: "Deposit failed",
+        pending: "Deposit pending",
+        success: "Deposit successful",
       }}
       state={buttonState}
       className="w-full"
@@ -164,7 +164,7 @@ export const MintButton = () => {
         className="w-max mx-auto border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-6 py-2 rounded-lg transition-colors hover:!bg-[var(--highlight)] hover:!border-[var(--highlight)] hover:!text-[var(--background)]"
         style={{ fontFamily: 'var(--font-press-start)' }}
       >
-        Mint Now
+        Deposit Now
       </Button>
     </LiveFeedback>
   );
