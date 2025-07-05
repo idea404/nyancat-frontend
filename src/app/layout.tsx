@@ -2,7 +2,7 @@ import { auth } from '@/auth';
 import ClientProviders from '@/providers';
 import '@worldcoin/mini-apps-ui-kit-react/styles.css';
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Cormorant_Garamond } from 'next/font/google';
+import { Geist, Geist_Mono, Press_Start_2P } from 'next/font/google';
 import './globals.css';
 
 const geistSans = Geist({
@@ -15,10 +15,10 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const cormorant = Cormorant_Garamond({
-  variable: '--font-cormorant',
+const pressStart = Press_Start_2P({
+  variable: '--font-press-start',
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400'],
 });
 
 export const metadata: Metadata = {
@@ -34,7 +34,7 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${pressStart.variable}`}>
         <ClientProviders session={session}>{children}</ClientProviders>
       </body>
     </html>

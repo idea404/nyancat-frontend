@@ -14,7 +14,7 @@ export default async function Home() {
     <>
       <Page.Header className="p-0">
         <TopBar
-          title="Home"
+          title=""
           endAdornment={
             <div className="flex items-center gap-2">
               <p className="text-sm font-semibold capitalize">
@@ -26,13 +26,16 @@ export default async function Home() {
         />
       </Page.Header>
       <Page.Main className="flex flex-col items-center justify-center gap-6 text-center mb-16">
-        <h1 className="text-6xl md:text-7xl font-bold leading-none">vyVault</h1>
-        <p className="max-w-xs text-lg md:text-xl">
+        <h1 className="text-4xl md:text-5xl leading-tight">NYAnCaT</h1>
+        <h3 className="max-w-xs text-sm md:text-base font-light text-muted-foreground">
+          Neutral Yield AggregatioNal Compounding Algorithmic Treasury
+        </h3>
+        <p className="max-w-xs text-sm md:text-base">
           Earn yield from advanced AI delta-neutral strategies throughout crypto
         </p>
         <div className="text-5xl md:text-6xl font-bold">14.7%</div>
         <p className="text-sm uppercase tracking-wide">Backtested APY</p>
-        <button className="mt-4 border-2 border-black px-8 py-2 rounded-lg transition-colors hover:bg-[color:var(--highlight)]">
+        <button className="mt-4 border-2 border-[var(--foreground)] text-[var(--foreground)] px-6 py-2 rounded-lg transition-colors hover:bg-[var(--highlight)] hover:text-[var(--background)]">
           Mint
         </button>
         <button className="underline mt-2 text-sm">Learn More</button>
