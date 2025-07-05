@@ -89,10 +89,10 @@ export default function Home() {
                     <img
                         src="https://www.pngplay.com/wp-content/uploads/7/Nyan-Cat-Pixel-Art-Transparent-Free-PNG.png"
                         alt="nyan cat"
-                        className="w-32 h-auto"
+                        className="w-50 h-auto"
                     />
 
-                    <h3 className="text-sm mt-2 -mb-1">Your Balance</h3>
+                    <h3 className="text-sm -mb-1">Your Balance</h3>
                     <div className="text-5xl md:text-6xl font-bold leading-tight -mt-1 -mb-1">{formatter.format(balance)}</div>
                     <p className="text-xs -mt-1 mb-2 opacity-80">{balance.toLocaleString()} vyShares</p>
 
