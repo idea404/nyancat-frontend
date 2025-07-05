@@ -1,7 +1,7 @@
 'use client';
 import { Button, LiveFeedback } from '@worldcoin/mini-apps-ui-kit-react';
 import { MiniKit, VerificationLevel } from '@worldcoin/minikit-js';
-import { useState } from 'react';
+import { useState, type FC } from 'react';
 
 /**
  * This component is an example of how to use World ID in Mini Apps
@@ -9,7 +9,12 @@ import { useState } from 'react';
  * It's critical you verify the proof on the server side
  * Read More: https://docs.world.org/mini-apps/commands/verify#verifying-the-proof
  */
-export const Verify = () => {
+
+interface VerifyProps {
+  onSuccess?: () => void;
+}
+
+export const Verify: FC<VerifyProps> = ({ onSuccess }) => {
   const [buttonState, setButtonState] = useState<
     'pending' | 'success' | 'failed' | undefined
   >(undefined);
@@ -36,6 +41,7 @@ export const Verify = () => {
 
       setButtonState('success');
       console.log('Verification saved in cookie');
+      onSuccess?.();
     } else {
       setButtonState('failed');
       console.log('Verification failed', result.finalPayload);

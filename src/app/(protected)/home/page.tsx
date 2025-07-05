@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { Page } from "@/components/PageLayout";
 import { Marble, TopBar, Button } from "@worldcoin/mini-apps-ui-kit-react";
 import RainbowText from "@/components/RainbowText";
@@ -11,6 +12,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 
 export default function Home() {
     const { data: session } = useSession();
+    const router = useRouter();
     const [balance, setBalance] = useState<number>(0);
     const [shares, setShares] = useState<number>(0);
 
@@ -129,6 +131,16 @@ export default function Home() {
                       loop
                       style={{ width: 200, height: 200 }}  // tailwind classes also OK
                     />
+
+                    {/* Vote button */}
+                    <Button
+                        size="sm"
+                        variant="primary"
+                        className="mt-2"
+                        onClick={() => router.push('/vote')}
+                    >
+                        Vote
+                    </Button>
 
                     <h3 className="text-sm -mt-1 -mb-1">Your Balance</h3>
                     <div className="text-5xl md:text-6xl font-bold leading-tight -mt-1 -mb-1">{formatter.format(balance)}</div>
