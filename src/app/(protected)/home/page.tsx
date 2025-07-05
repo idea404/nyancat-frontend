@@ -189,8 +189,13 @@ export default function Home() {
                             {/* Pixel-style chat bubble – now anchored to the cat button instead of the viewport centre */}
                             {showChat && (
                                 <div
-                                    className="fixed left-1/2 -translate-x-1/2 z-50 bg-[var(--foreground)] border-4 border-[gray] p-4 pointer-events-auto w-max max-w-[250px] whitespace-normal"
-                                    style={{ bottom: "calc(100% + 10px)", fontFamily: "var(--font-press-start)" }}
+                                    className="absolute left-1/2 -translate-x-1/2 z-50 bg-[var(--foreground)] border-4 border-[gray] p-4 pointer-events-auto whitespace-normal"
+                                    style={{ 
+                                        bottom: "calc(100% + 10px)", 
+                                        fontFamily: "var(--font-press-start)",
+                                        width: "250px",
+                                        marginLeft: "-125px"
+                                    }}
                                 >
                                     <p
                                         className="text-xs leading-relaxed text-[var(--background)]"
