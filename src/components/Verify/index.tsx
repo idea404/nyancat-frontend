@@ -53,7 +53,7 @@ export const Verify: FC<VerifyProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full gap-4">
+    <div className="flex justify-center w-full">
       <LiveFeedback
         label={{
           failed: 'Failed to verify',
@@ -61,7 +61,7 @@ export const Verify: FC<VerifyProps> = ({ onSuccess }) => {
           success: 'Verified',
         }}
         state={buttonState}
-        className="w-full flex justify-center"
+        className=""
       >
         <Button
           onClick={onClickVerify}

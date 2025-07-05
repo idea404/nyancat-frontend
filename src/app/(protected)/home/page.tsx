@@ -13,8 +13,18 @@ import { Player } from "@lottiefiles/react-lottie-player";
 export default function Home() {
     const { data: session } = useSession();
     const router = useRouter();
-    const [balance, setBalance] = useState<number>(0);
-    const [shares, setShares] = useState<number>(0);
+    const [balance, setBalance] = useState<number>(() => {
+        if (typeof window !== 'undefined') {
+            return parseFloat(localStorage.getItem('nyancatBalance') || '0');
+        }
+        return 0;
+    });
+    const [shares, setShares] = useState<number>(() => {
+        if (typeof window !== 'undefined') {
+            return parseFloat(localStorage.getItem('nyancatShares') || '0');
+        }
+        return 0;
+    });
 
     // Determine if the user has deposited yet
     const isZeroBalance = balance === 0;
@@ -49,15 +59,27 @@ export default function Home() {
     };
 
     const incrementBalance = () => {
-        setBalance((prev) => prev + 100);
-        setShares((prev) => prev + 100);
+        setBalance((prev) => {
+            const newBalance = prev + 100;
+            localStorage.setItem('nyancatBalance', newBalance.toString());
+            return newBalance;
+        });
+        setShares((prev) => {
+            const newShares = prev + 100;
+            localStorage.setItem('nyancatShares', newShares.toString());
+            return newShares;
+        });
     };
 
     useEffect(() => {
         if (shares === 0) return;
 
         const interval = setInterval(() => {
-            setBalance((prev) => Number((prev * 1.0001).toFixed(2)));
+            setBalance((prev) => {
+                const newBalance = Number((prev * 1.0001).toFixed(2));
+                localStorage.setItem('nyancatBalance', newBalance.toString());
+                return newBalance;
+            });
         }, 2000);
 
         return () => clearInterval(interval);
@@ -167,7 +189,7 @@ export default function Home() {
                             {/* Pixel-style chat bubble – now anchored to the cat button instead of the viewport centre */}
                             {showChat && (
                                 <div
-                                    className="absolute right-0 z-50 bg-[var(--foreground)] border-4 border-[gray] p-4 pointer-events-auto w-max max-w-[250px] whitespace-normal"
+                                    className="fixed left-1/2 -translate-x-1/2 z-50 bg-[var(--foreground)] border-4 border-[gray] p-4 pointer-events-auto w-max max-w-[250px] whitespace-normal"
                                     style={{ bottom: "calc(100% + 10px)", fontFamily: "var(--font-press-start)" }}
                                 >
                                     <p
