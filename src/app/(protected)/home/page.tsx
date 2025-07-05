@@ -7,6 +7,7 @@ import { Page } from '@/components/PageLayout';
 // import { ViewPermissions } from '@/components/ViewPermissions';
 import { Marble, TopBar } from '@worldcoin/mini-apps-ui-kit-react';
 import MintButton from '@/components/MintButton';
+import RainbowText from '@/components/RainbowText';
 
 export default async function Home() {
   const session = await auth();
@@ -33,7 +34,9 @@ export default async function Home() {
       </Page.Header>
       <Page.Main className="flex flex-col items-center justify-center gap-6 text-center mb-16">
         <div className="flex flex-col items-center gap-0">
-          <h1 className="text-4xl md:text-5xl leading-tight mb-0">NYAnCAT</h1>
+          <h1 className="text-4xl md:text-5xl leading-tight mb-0">
+            <RainbowText text="NYAnCAT" />
+          </h1>
           <p className="max-w-xs text-[10px] md:text-xs font-light text-muted-foreground -mt-1">
             Neutral Yield AggregatioNal Compounding Algorithmic Treasury
           </p>
@@ -41,7 +44,9 @@ export default async function Home() {
         <p className="max-w-xs text-sm md:text-base">
           Earn yield from advanced AI delta-neutral strategies throughout crypto
         </p>
-        <div className="text-5xl md:text-6xl font-bold mb-0">14.7%</div>
+        <div className="text-5xl md:text-6xl font-bold mb-0">
+          <RainbowText text="14.7%" />
+        </div>
         <p className="text-sm tracking-wide mt-0">Backtested APY</p>
         <MintButton />
         <button className="underline mt-2 text-sm">Learn More</button>
