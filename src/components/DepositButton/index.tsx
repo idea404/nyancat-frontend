@@ -77,14 +77,14 @@ export const DepositButton = ({ onSuccess }: DepositButtonProps) => {
         success: "Deposit successful",
       }}
       state={buttonState}
-      className="flex-1"
+      className=""
     >
       <Button
         onClick={handleDeposit}
         disabled={buttonState === "pending"}
-        size="lg"
+        size="sm"
         variant="primary"
-        className="w-full border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-6 py-2 rounded-lg transition-colors hover:!bg-[var(--highlight)] hover:!border-[var(--highlight)] hover:!text-[var(--background)]"
+        className="w-[108px] border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-0 py-2 rounded-lg transition-colors hover:!bg-[var(--highlight)] hover:!border-[var(--highlight)] hover:!text-[var(--background)]"
         style={{ fontFamily: "var(--font-press-start)" }}
       >
         Deposit
