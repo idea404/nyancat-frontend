@@ -164,14 +164,14 @@ export default function Home() {
                     <div className="relative bg-[var(--foreground)] border-4 border-[gray] p-4 max-w-sm mx-4 pointer-events-auto" style={{ fontFamily: "var(--font-press-start)" }}>
                         <button
                             onClick={closeChat}
-                            className="absolute -top-3 -right-3 bg-[var(--background)] text-[var(--foreground)] px-2 py-1 leading-none text-xs"
+                            className="absolute top-1 right-1 bg-[var(--background)] text-[#0056A5] px-1 py-0.5 leading-none text-xs"
                             style={{ fontFamily: "var(--font-press-start)" }}
                         >
                             X
                         </button>
                         <p className="text-xs leading-relaxed text-[var(--background)]" style={{ wordBreak: "break-word" }}>{chatMessage}</p>
                         {/* Bubble tail */}
-                        <div className="absolute -bottom-3 left-6 w-4 h-4 bg-[var(--foreground)] border-l-4 border-b-4 border-[gray] rotate-45" />
+                        <div className="absolute -bottom-[10px] left-6 w-4 h-4 bg-[var(--foreground)] border-l-4 border-b-4 border-[gray] rotate-45" />
                     </div>
                 </div>
             )}
