@@ -19,17 +19,16 @@ export const Verify: FC<VerifyProps> = ({ onSuccess }) => {
     'pending' | 'success' | 'failed' | undefined
   >(undefined);
 
-  const [whichVerification, setWhichVerification] = useState<VerificationLevel>(
-    VerificationLevel.Device,
-  );
+  // no need to track which verification variant when only Device is available
+  const whichVerification = VerificationLevel.Device;
 
-  const onClickVerify = async (verificationLevel: VerificationLevel) => {
+  const onClickVerify = async () => {
+    if (buttonState === 'pending') return;
     setButtonState('pending');
-    setWhichVerification(verificationLevel);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result: any = await MiniKit.commandsAsync.verify({ // types are outdated
       action: 'verify',
-      verification_level: verificationLevel,
+      verification_level: VerificationLevel.Device,
     });
     console.log(result.finalPayload);
 
@@ -54,50 +53,25 @@ export const Verify: FC<VerifyProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div className="grid w-full gap-4">
-      <p className="text-lg font-semibold">Verify</p>
+    <div className="flex flex-col items-center w-full gap-4">
       <LiveFeedback
         label={{
           failed: 'Failed to verify',
           pending: 'Verifying',
           success: 'Verified',
         }}
-        state={
-          whichVerification === VerificationLevel.Device
-            ? buttonState
-            : undefined
-        }
-        className="w-full"
+        state={buttonState}
+        className="w-full flex justify-center"
       >
         <Button
-          onClick={() => onClickVerify(VerificationLevel.Device)}
+          onClick={onClickVerify}
           disabled={buttonState === 'pending'}
-          size="lg"
-          variant="tertiary"
-          className="w-full"
-        >
-          Verify (Device)
-        </Button>
-      </LiveFeedback>
-      <LiveFeedback
-        label={{
-          failed: 'Failed to verify',
-          pending: 'Verifying',
-          success: 'Verified',
-        }}
-        state={
-          whichVerification === VerificationLevel.Orb ? buttonState : undefined
-        }
-        className="w-full"
-      >
-        <Button
-          onClick={() => onClickVerify(VerificationLevel.Orb)}
-          disabled={buttonState === 'pending'}
-          size="lg"
+          size="sm"
           variant="primary"
-          className="w-full"
+          className="w-[120px] border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-4 py-2 rounded-lg transition-colors hover:!bg-[var(--highlight)] hover:!border-[var(--highlight)] hover:!text-[var(--background)]"
+          style={{ fontFamily: 'var(--font-press-start)' }}
         >
-          Verify (Orb)
+          Verify
         </Button>
       </LiveFeedback>
     </div>

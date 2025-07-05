@@ -136,7 +136,8 @@ export default function Home() {
                     <Button
                         size="sm"
                         variant="primary"
-                        className="mt-2"
+                        className="w-[120px] border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-4 py-2 rounded-lg mt-2 transition-colors hover:!bg-[var(--highlight)] hover:!border-[var(--highlight)] hover:!text-[var(--background)]"
+                        style={{ fontFamily: 'var(--font-press-start)' }}
                         onClick={() => router.push('/vote')}
                     >
                         Vote
@@ -166,7 +167,7 @@ export default function Home() {
                             {/* Pixel-style chat bubble – now anchored to the cat button instead of the viewport centre */}
                             {showChat && (
                                 <div
-                                    className="absolute left-1/2 -translate-x-1/2 z-50 bg-[var(--foreground)] border-4 border-[gray] p-4 pointer-events-auto w-max max-w-[250px] whitespace-normal"
+                                    className="absolute right-0 z-50 bg-[var(--foreground)] border-4 border-[gray] p-4 pointer-events-auto w-max max-w-[250px] whitespace-normal"
                                     style={{ bottom: "calc(100% + 10px)", fontFamily: "var(--font-press-start)" }}
                                 >
                                     <p
