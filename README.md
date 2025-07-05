@@ -1,33 +1,33 @@
-## This template provides a minimal setup to get Next.js working with MiniKit
+## Create a Mini App
 
-## Setup
+[Mini apps](https://docs.worldcoin.org/mini-apps) enable third-party developers to create native-like applications within World App.
 
-```bash
-cp .env.example .env
-pnpm i
-pnpm dev
+This template is a way for you to quickly get started with authentication and examples of some of the trickier commands.
 
-```
+## Getting Started
 
-To run as a mini app choose a production app in the dev portal and use NGROK to tunnel. Set the `NEXTAUTH_URL` and the redirect url if using sign in with worldcoin to that ngrok url
+1. cp .env.example .env.local
+2. Follow the instructions in the .env.local file
+3. Run `npm run dev`
+4. Run `ngrok http 3000`
+5. Run `npx auth secret` to update the `AUTH_SECRET` in the .env.local file
+6. Add your domain to the `allowedDevOrigins` in the next.config.ts file.
+7. [For Testing] If you're using a proxy like ngrok, you need to update the `AUTH_URL` in the .env.local file to your ngrok url.
+8. Continue to developer.worldcoin.org and make sure your app is connected to the right ngrok url
+9. [Optional] For Verify and Send Transaction to work you need to do some more setup in the dev portal. The steps are outlined in the respective component files.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Authentication
 
-To use the application, you'll need to:
+This starter kit uses [Minikit's](https://github.com/worldcoin/minikit-js) wallet auth to authenticate users, and [next-auth](https://authjs.dev/getting-started) to manage sessions.
 
-1. **Get World ID Credentials**
-   From the [World ID Developer Portal](https://developer.worldcoin.org/):
+## UI Library
 
-   - Create a new app to get your `APP_ID`
-   - Get `DEV_PORTAL_API_KEY` from the API Keys section
-   - Navigate to "Sign in with World ID" page to get:
-     - `WLD_CLIENT_ID`
-     - `WLD_CLIENT_SECRET`
+This starter kit uses [Mini Apps UI Kit](https://github.com/worldcoin/mini-apps-ui-kit) to style the app. We recommend using the UI kit to make sure you are compliant with [World App's design system](https://docs.world.org/mini-apps/design/app-guidelines).
 
-2. **Configure Action**
-   - In the Developer Portal, create an action in the "Incognito Actions" section
-   - Use the same action name in `components/Verify/index.tsx`
+## Eruda
 
-View docs: [Docs](https://docs.world.org/)
+[Eruda](https://github.com/liriliri/eruda) is a tool that allows you to inspect the console while building as a mini app. You should disable this in production.
 
-[Developer Portal](https://developer.worldcoin.org/)
+## Contributing
+
+This template was made with help from the amazing [supercorp-ai](https://github.com/supercorp-ai) team.
