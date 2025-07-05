@@ -102,11 +102,11 @@ export default function Home() {
                         className="w-32 h-auto"
                     />
 
-                    <h3 className="text-sm mt-2">Your Balance</h3>
-                    <div className="text-5xl md:text-6xl font-bold leading-tight">{formatter.format(balance)}</div>
+                    <h3 className="text-sm mt-2 -mb-1">Your Balance</h3>
+                    <div className="text-5xl md:text-6xl font-bold leading-tight -mt-1 -mb-1">{formatter.format(balance)}</div>
                     <p className="text-xs -mt-1 mb-2 opacity-80">{balance.toLocaleString()} vyShares</p>
 
-                    <div className="text-4xl font-bold leading-tight mt-2">42.69%</div>
+                    <div className="text-4xl font-bold leading-tight mt-2 -mb-1">42.69%</div>
                     <p className="text-xs -mt-1">YTD Return</p>
 
                     {/* Buttons */}
