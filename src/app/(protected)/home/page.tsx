@@ -6,6 +6,7 @@ import { Page } from "@/components/PageLayout";
 import { Marble, TopBar, Button } from "@worldcoin/mini-apps-ui-kit-react";
 import RainbowText from "@/components/RainbowText";
 import DepositButton from "@/components/DepositButton";
+import MintButton from "@/components/MintButton";
 
 export default function Home() {
     const { data: session } = useSession();
@@ -76,8 +77,10 @@ export default function Home() {
                         <RainbowText text="14.7%" />
                     </div>
                     <p className="text-sm tracking-wide mt-0">Backtested APY</p>
-                    <DepositButton />
-                    <button className="underline mt-2 text-sm">Learn More</button>
+                    <div className="w-full max-w-xs flex flex-col items-center gap-2">
+                        <MintButton onSuccess={incrementBalance} />
+                        <button className="underline text-sm">Learn More</button>
+                    </div>
                 </Page.Main>
             ) : (
                 /* Balance screen */
