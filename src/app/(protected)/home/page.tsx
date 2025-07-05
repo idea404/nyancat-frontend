@@ -14,7 +14,7 @@ export default async function Home() {
     <>
       <Page.Header className="p-0">
         <img
-          src="https://static.wikia.nocookie.net/nyancat/images/5/50/MEMZ.gif/revision/latest/smart/width/386/height/259?cb=20221130212737"
+          src="https://gimgs2.nohat.cc/thumb/f/640/nyan-kat-transparent-background-png-clipart--comhiclipartvbapy.jpg"
           alt="nyan cat"
           className="absolute left-3 top-3 w-10 h-auto"
         />
