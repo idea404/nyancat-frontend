@@ -100,7 +100,7 @@ export default function Home() {
                     <p className="text-xs -mt-1">YTD Return</p>
 
                     {/* Buttons */}
-                    <div className="flex gap-2 w-full max-w-xs mt-4">
+                    <div className="flex gap-2 w-full max-w-xs mt-4 justify-center">
                         <DepositButton onSuccess={incrementBalance} />
                         <div className="flex-1">
                             <Button
