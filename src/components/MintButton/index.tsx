@@ -13,8 +13,8 @@ import VaultAbi from "@/abi/USDvyVault.json";
  * USDC token address and Vault contract address.
  * You can set these via NEXT_PUBLIC env vars so they are available at build/runtime.
  */
-const USDC_ADDRESS = (process.env.NEXT_PUBLIC_USDC_ADDRESS ?? "0xUSDC_ADDRESS_HERE") as `0x${string}`; // TODO
-const VAULT_ADDRESS = (process.env.NEXT_PUBLIC_VAULT_ADDRESS ?? "0xVAULT_ADDRESS_HERE") as `0x${string}`; // TODO
+const USDC_ADDRESS = (process.env.NEXT_PUBLIC_USDC_ADDRESS ?? "0x66145f38cBAC35Ca6F1Dfb4914dF98F1614aeA88") as `0x${string}`;
+const VAULT_ADDRESS = (process.env.NEXT_PUBLIC_VAULT_ADDRESS ?? "0x160521A3f3Caec20c0eF62bFFB846892f5769ae6") as `0x${string}`;
 // Flag that allows us to short-circuit on-chain confirmations (demo/stub mode)
 const DEMO_MODE = true;
 

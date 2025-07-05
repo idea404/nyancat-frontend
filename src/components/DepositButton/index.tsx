@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 
 const DEMO_MODE = true;
 const USDC_AMOUNT = 100;
-const VAULT_ADDRESS = (process.env.NEXT_PUBLIC_VAULT_ADDRESS ?? "0xVAULT_ADDRESS_HERE") as `0x${string}`;
+const VAULT_ADDRESS = (process.env.NEXT_PUBLIC_VAULT_ADDRESS ?? "0x160521A3f3Caec20c0eF62bFFB846892f5769ae6") as `0x${string}`;
 
 interface DepositButtonProps {
   onSuccess?: () => void;
