@@ -13,6 +13,9 @@ export default function Home() {
     const [balance, setBalance] = useState<number>(0);
     const [shares, setShares] = useState<number>(0);
 
+    // Determine if the user has deposited yet
+    const isZeroBalance = balance === 0;
+
     const incrementBalance = () => {
         setBalance((prev) => prev + 100);
         setShares((prev) => prev + 100);
@@ -37,45 +40,33 @@ export default function Home() {
 
     return (
         <>
-            {balance === 0 && (
-                <Page.Header className="p-0">
+            {/* Single Header with conditional content */}
+            <Page.Header className="p-0 relative">
+                {isZeroBalance ? (
                     <img
                         src="https://www.pngplay.com/wp-content/uploads/7/Nyan-Cat-Pixel-Art-Transparent-Free-PNG.png"
                         alt="nyan cat"
                         className="absolute left-3 top-3 w-20 h-auto"
                     />
-                    <TopBar
-                        title=""
-                        endAdornment={
-                            <div className="flex items-center gap-2">
-                                <p className="text-sm font-semibold capitalize">{session?.user.username}</p>
-                                <Marble src={session?.user.profilePictureUrl} className="w-12" />
-                            </div>
-                        }
-                    />
-                </Page.Header>
-            )}
-
-            {balance !== 0 && (
-                <Page.Header className="p-0 relative">
-                    {/* Rainbow title top-left */}
+                ) : (
                     <div className="absolute left-5 top-8">
                         <RainbowText text="NYAnCAT" />
                     </div>
-                    <TopBar
-                        title=""
-                        endAdornment={
-                            <div className="flex items-center gap-2">
-                                <p className="text-sm font-semibold capitalize">{session?.user.username}</p>
-                                <Marble src={session?.user.profilePictureUrl} className="w-12" />
-                            </div>
-                        }
-                    />
-                </Page.Header>
-            )}
+                )}
+
+                <TopBar
+                    title=""
+                    endAdornment={
+                        <div className="flex items-center gap-2">
+                            <p className="text-sm font-semibold capitalize">{session?.user.username}</p>
+                            <Marble src={session?.user.profilePictureUrl} className="w-12" />
+                        </div>
+                    }
+                />
+            </Page.Header>
 
             {/* Decide which screen to render */}
-            {balance === 0 ? (
+            {isZeroBalance ? (
                 /* First-time hero */
                 <Page.Main className="flex flex-col items-center justify-center gap-6 text-center mb-16">
                     <div className="flex flex-col items-center gap-0">
