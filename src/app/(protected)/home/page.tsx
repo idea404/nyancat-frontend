@@ -22,7 +22,7 @@ export default function Home() {
         if (shares === 0) return;
 
         const interval = setInterval(() => {
-            setBalance((prev) => Number((prev * 1.01).toFixed(2)));
+            setBalance((prev) => Number((prev * 1.0001).toFixed(2)));
         }, 2000);
 
         return () => clearInterval(interval);
