@@ -15,6 +15,8 @@ import VaultAbi from "@/abi/USDvyVault.json";
  */
 const USDC_ADDRESS = (process.env.NEXT_PUBLIC_USDC_ADDRESS ?? "0xUSDC_ADDRESS_HERE") as `0x${string}`;
 const VAULT_ADDRESS = (process.env.NEXT_PUBLIC_VAULT_ADDRESS ?? "0xVAULT_ADDRESS_HERE") as `0x${string}`;
+// Flag that allows us to short-circuit on-chain confirmations (demo/stub mode)
+const DEMO_MODE = true;
 
 export const MintButton = () => {
   const { data: session } = useSession();
@@ -92,8 +94,15 @@ export const MintButton = () => {
       });
 
       if (finalPayload.status === "success") {
-        console.log("Tx submitted, id:", finalPayload.transaction_id);
-        setTransactionId(finalPayload.transaction_id);
+        if (DEMO_MODE) {
+          // In demo mode we skip waiting for the on-chain receipt and mark success immediately
+          console.log("[DEMO] Tx simulated, id:", finalPayload.transaction_id);
+          setButtonState("success");
+          setTimeout(() => setButtonState(undefined), 3000);
+        } else {
+          console.log("Tx submitted, id:", finalPayload.transaction_id);
+          setTransactionId(finalPayload.transaction_id);
+        }
       } else {
         console.error("sendTransaction failed", finalPayload);
         setButtonState("failed");
