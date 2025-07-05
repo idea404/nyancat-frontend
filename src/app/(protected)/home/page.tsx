@@ -14,7 +14,7 @@ export default async function Home() {
     <>
       <Page.Header className="p-0">
         <img
-          src="https://gimgs2.nohat.cc/thumb/f/640/nyan-kat-transparent-background-png-clipart--comhiclipartvbapy.jpg"
+          src="https://www.pngplay.com/wp-content/uploads/7/Nyan-Cat-Pixel-Art-Transparent-Free-PNG.png"
           alt="nyan cat"
           className="absolute left-3 top-3 w-10 h-auto"
         />
