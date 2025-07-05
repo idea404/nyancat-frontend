@@ -20,7 +20,7 @@ export const Verify: FC<VerifyProps> = ({ onSuccess }) => {
   >(undefined);
 
   // no need to track which verification variant when only Device is available
-  const whichVerification = VerificationLevel.Device;
+  // const whichVerification = VerificationLevel.Device;
 
   const onClickVerify = async () => {
     if (buttonState === 'pending') return;
