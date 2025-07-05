@@ -102,15 +102,17 @@ export default function Home() {
                     {/* Buttons */}
                     <div className="flex gap-2 w-full max-w-xs mt-4">
                         <DepositButton onSuccess={incrementBalance} />
-                        <Button
-                            size="lg"
-                            variant="tertiary"
-                            disabled
-                            className="flex-1 border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-6 py-2 rounded-lg"
-                            style={{ fontFamily: "var(--font-press-start)" }}
-                        >
-                            Redeem
-                        </Button>
+                        <div className="flex-1">
+                            <Button
+                                size="lg"
+                                variant="tertiary"
+                                disabled
+                                className="w-full border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-6 py-2 rounded-lg"
+                                style={{ fontFamily: "var(--font-press-start)" }}
+                            >
+                                Redeem
+                            </Button>
+                        </div>
                     </div>
                 </Page.Main>
             )}
