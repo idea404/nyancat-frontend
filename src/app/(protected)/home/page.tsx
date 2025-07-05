@@ -6,7 +6,6 @@ import { Page } from "@/components/PageLayout";
 import { Marble, TopBar, Button } from "@worldcoin/mini-apps-ui-kit-react";
 import RainbowText from "@/components/RainbowText";
 import DepositButton from "@/components/DepositButton";
-import MintButton from "@/components/MintButton";
 
 export default function Home() {
     const { data: session } = useSession();
