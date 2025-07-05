@@ -30,14 +30,21 @@ export default function Home() {
     const [showChat, setShowChat] = useState(false);
     const [chatMessage, setChatMessage] = useState<string>("");
 
-    const openChat = () => {
-        // Pick a random message each time the cat is tapped
+    /**
+     * Toggle the degen-news chat bubble. When opening, pick a random message.
+     * Tapping the cat again will close the bubble.
+     */
+    const toggleChat = () => {
+        if (showChat) {
+            setShowChat(false);
+            return;
+        }
+
+        // Pick a random message each time the cat is tapped **and** the bubble is being opened
         const random = degenNews[Math.floor(Math.random() * degenNews.length)];
         setChatMessage(random);
         setShowChat(true);
     };
-
-    const closeChat = () => setShowChat(false);
 
     const incrementBalance = () => {
         setBalance((prev) => prev + 100);
@@ -134,14 +141,34 @@ export default function Home() {
                     <div className="flex gap-2 w-full max-w-xs mt-4 justify-center">
                         <DepositButton onSuccess={incrementBalance} />
 
-                        {/* Degen-news cat button */}
-                        <button
-                            onClick={openChat}
-                            className="rounded-full border-2 border-[var(--foreground)] p-1 bg-[var(--background)] flex items-center justify-center"
-                            style={{ width: 56, height: 56 }}
-                        >
-                            <Player src="/menu.json" autoplay loop style={{ width: 48, height: 48 }} />
-                        </button>
+                        {/* Degen-news cat button – wrapped in a relative container so the chat bubble can be positioned against it */}
+                        <div className="relative">
+                            <button
+                                onClick={toggleChat}
+                                className="rounded-full border-2 border-[var(--foreground)] p-1 bg-[var(--background)] flex items-center justify-center"
+                                style={{ width: 56, height: 56 }}
+                            >
+                                <Player src="/menu.json" autoplay loop style={{ width: 48, height: 48 }} />
+                            </button>
+
+                            {/* Pixel-style chat bubble – now anchored to the cat button instead of the viewport centre */}
+                            {showChat && (
+                                <div
+                                    className="absolute bottom-full left-1/2 translate-x-[-50%] z-50 bg-[var(--foreground)] border-4 border-[gray] p-4 max-w-sm pointer-events-auto"
+                                    style={{ fontFamily: "var(--font-press-start)" }}
+                                >
+                                    <p
+                                        className="text-xs leading-relaxed text-[var(--background)]"
+                                        style={{ wordBreak: "break-word" }}
+                                    >
+                                        {chatMessage}
+                                    </p>
+
+                                    {/* Bubble tail – moved 1 px up */}
+                                    <div className="absolute -bottom-[9px] left-6 w-4 h-4 bg-[var(--foreground)] border-l-4 border-b-4 border-[gray] rotate-45" />
+                                </div>
+                            )}
+                        </div>
 
                         <div>
                             <Button
@@ -156,24 +183,6 @@ export default function Home() {
                         </div>
                     </div>
                 </Page.Main>
-            )}
-
-            {/* Pixel-style chat bubble overlay */}
-            {showChat && (
-                <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="relative bg-[var(--foreground)] border-4 border-[gray] p-4 max-w-sm mx-4 pointer-events-auto" style={{ fontFamily: "var(--font-press-start)" }}>
-                        <button
-                            onClick={closeChat}
-                            className="absolute top-1 right-1 bg-[var(--background)] text-[#0056A5] px-1 py-0.5 leading-none text-xs"
-                            style={{ fontFamily: "var(--font-press-start)" }}
-                        >
-                            X
-                        </button>
-                        <p className="text-xs leading-relaxed text-[var(--background)]" style={{ wordBreak: "break-word" }}>{chatMessage}</p>
-                        {/* Bubble tail */}
-                        <div className="absolute -bottom-[10px] left-6 w-4 h-4 bg-[var(--foreground)] border-l-4 border-b-4 border-[gray] rotate-45" />
-                    </div>
-                </div>
             )}
         </>
     );
