@@ -84,7 +84,7 @@ export const DepositButton = ({ onSuccess }: DepositButtonProps) => {
         disabled={buttonState === "pending"}
         size="sm"
         variant="primary"
-        className="w-[108px] border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-2 py-2 rounded-lg transition-colors hover:!bg-[var(--highlight)] hover:!border-[var(--highlight)] hover:!text-[var(--background)]"
+        className="w-[120px] border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-4 py-2 rounded-lg transition-colors hover:!bg-[var(--highlight)] hover:!border-[var(--highlight)] hover:!text-[var(--background)]"
         style={{ fontFamily: "var(--font-press-start)" }}
       >
         Deposit

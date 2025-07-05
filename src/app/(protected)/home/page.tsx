@@ -148,7 +148,7 @@ export default function Home() {
                                 size="sm"
                                 variant="tertiary"
                                 disabled
-                                className="w-[108px] border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-2 py-2 rounded-lg"
+                                className="w-[120px] border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-4 py-2 rounded-lg"
                                 style={{ fontFamily: "var(--font-press-start)" }}
                             >
                                 Redeem
@@ -170,6 +170,8 @@ export default function Home() {
                             X
                         </button>
                         <p className="text-xs leading-relaxed text-[var(--background)]" style={{ wordBreak: "break-word" }}>{chatMessage}</p>
+                        {/* Bubble tail */}
+                        <div className="absolute -bottom-3 left-6 w-4 h-4 bg-[var(--foreground)] border-l-4 border-b-4 border-[gray] rotate-45" />
                     </div>
                 </div>
             )}
