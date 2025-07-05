@@ -6,6 +6,7 @@ import { Page } from '@/components/PageLayout';
 // import { Verify } from '@/components/Verify';
 // import { ViewPermissions } from '@/components/ViewPermissions';
 import { Marble, TopBar } from '@worldcoin/mini-apps-ui-kit-react';
+import MintButton from '@/components/MintButton';
 
 export default async function Home() {
   const session = await auth();
@@ -42,9 +43,7 @@ export default async function Home() {
         </p>
         <div className="text-5xl md:text-6xl font-bold mb-0">14.7%</div>
         <p className="text-sm tracking-wide mt-0">Backtested APY</p>
-        <button className="mt-4 border-2 border-[var(--foreground)] text-[var(--foreground)] px-6 py-2 rounded-lg transition-colors hover:bg-[var(--highlight)] hover:border-[var(--highlight)] hover:text-[var(--background)]">
-          Mint Now
-        </button>
+        <MintButton />
         <button className="underline mt-2 text-sm">Learn More</button>
       </Page.Main>
     </>
