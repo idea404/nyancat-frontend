@@ -161,15 +161,15 @@ export default function Home() {
             {/* Pixel-style chat bubble overlay */}
             {showChat && (
                 <div className="fixed inset-0 flex items-center justify-center z-50">
-                    <div className="relative bg-[var(--background)] border-4 border-[var(--foreground)] p-4 max-w-sm mx-4 pointer-events-auto" style={{ fontFamily: "var(--font-press-start)" }}>
+                    <div className="relative bg-[var(--foreground)] border-4 border-[gray] p-4 max-w-sm mx-4 pointer-events-auto" style={{ fontFamily: "var(--font-press-start)" }}>
                         <button
                             onClick={closeChat}
-                            className="absolute -top-3 -right-3 bg-[var(--foreground)] text-[var(--background)] px-2 py-1 leading-none text-xs"
+                            className="absolute -top-3 -right-3 bg-[var(--background)] text-[var(--foreground)] px-2 py-1 leading-none text-xs"
                             style={{ fontFamily: "var(--font-press-start)" }}
                         >
                             X
                         </button>
-                        <p className="text-xs leading-relaxed" style={{ wordBreak: "break-word" }}>{chatMessage}</p>
+                        <p className="text-xs leading-relaxed text-[var(--background)]" style={{ wordBreak: "break-word" }}>{chatMessage}</p>
                     </div>
                 </div>
             )}
