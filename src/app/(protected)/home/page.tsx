@@ -45,7 +45,7 @@ export default function Home() {
             <Page.Header className="p-0 relative">
                 {isZeroBalance ? (
                     <Player
-                      src="/nyan.lottie"   // lives in /public, so this path is fine
+                      src="/nyan.json"   // lives in /public, so this path is fine
                       autoplay
                       loop
                       style={{ width: 80, height: 80 }}  // tailwind classes also OK
@@ -94,7 +94,7 @@ export default function Home() {
                 <Page.Main className="flex flex-col items-center justify-center text-center mb-16 gap-4">
                     {/* Cat image where hero text was */}
                     <Player
-                      src="/nyan.lottie"   // lives in /public, so this path is fine
+                      src="/nyan.json"   // lives in /public, so this path is fine
                       autoplay
                       loop
                       style={{ width: 80, height: 80 }}  // tailwind classes also OK
