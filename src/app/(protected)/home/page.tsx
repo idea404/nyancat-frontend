@@ -166,7 +166,7 @@ export default function Home() {
                             {/* Pixel-style chat bubble – now anchored to the cat button instead of the viewport centre */}
                             {showChat && (
                                 <div
-                                    className="absolute left-1/2 -translate-x-1/2 z-50 bg-[var(--foreground)] border-4 border-[gray] p-4 pointer-events-auto w-max max-w-xs md:max-w-sm whitespace-normal"
+                                    className="absolute right-full -mr-3 z-50 bg-[var(--foreground)] border-4 border-[gray] p-4 pointer-events-auto w-max max-w-[250px] whitespace-normal"
                                     style={{ bottom: "calc(100% + 10px)", fontFamily: "var(--font-press-start)" }}
                                 >
                                     <p
@@ -176,8 +176,8 @@ export default function Home() {
                                         {chatMessage}
                                     </p>
 
-                                    {/* Bubble tail – moved 1 px up and centered */}
-                                    <div className="absolute -bottom-[9px] left-1/2 -translate-x-1/2 w-4 h-4 bg-[var(--foreground)] border-l-4 border-b-4 border-[gray] rotate-45" />
+                                    {/* Bubble tail – now anchored to the right edge */}
+                                    <div className="absolute -bottom-[9px] right-2 w-4 h-4 bg-[var(--foreground)] border-l-4 border-b-4 border-[gray] rotate-45" />
                                 </div>
                             )}
                         </div>
