@@ -32,7 +32,7 @@ export default async function Home() {
       </Page.Header>
       <Page.Main className="flex flex-col items-center justify-center gap-6 text-center mb-16">
         <div className="flex flex-col items-center gap-0">
-          <h1 className="text-4xl md:text-5xl leading-tight mb-0">NYAnCaT</h1>
+          <h1 className="text-4xl md:text-5xl leading-tight mb-0">NYAnCAT</h1>
           <p className="max-w-xs text-xs md:text-base font-light text-muted-foreground mt-0 -mt-1">
             Neutral Yield AggregatioNal Compounding Algorithmic Treasury
           </p>
