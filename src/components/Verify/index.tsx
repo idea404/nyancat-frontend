@@ -27,38 +27,18 @@ export const Verify = () => {
       verification_level: verificationLevel,
     });
     console.log(result.finalPayload);
-    // Verify the proof
-    const appId = process.env.NEXT_PUBLIC_APP_ID;
-    console.log('NEXT_PUBLIC_APP_ID:', appId);
-    const verifyUrl = `https://developer.worldcoin.org/api/v2/verify/${appId}`;
-    console.log('Verifying with URL:', verifyUrl);
 
-    const requestBody = {
-      nullifier_hash: result.finalPayload.nullifier_hash,
-      merkle_root: result.finalPayload.merkle_root,
-      proof: result.finalPayload.proof,
-      verification_level: result.finalPayload.verification_level,
-      action: 'verify',
-    };
+    if (result.finalPayload.status === 'success') {
+      // Store verification details in a cookie for 7 days
+      document.cookie = `worldcoinVerification=${encodeURIComponent(
+        JSON.stringify(result.finalPayload),
+      )}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Strict`;
 
-    console.log('Request Body before stringify:', requestBody);
-
-    const response = await fetch(verifyUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(requestBody),
-    });
-
-    const data = await response.json();
-    if (data.verifyRes.success) {
       setButtonState('success');
-      console.log("yay it worked");
-      // Here we'll just do nothing
+      console.log('Verification saved in cookie');
     } else {
       setButtonState('failed');
-      console.log("merp I failed", result.finalPayload)
+      console.log('Verification failed', result.finalPayload);
 
       // Reset the button state after 3 seconds
       setTimeout(() => {
