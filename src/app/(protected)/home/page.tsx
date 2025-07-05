@@ -148,7 +148,7 @@ export default function Home() {
                                 size="sm"
                                 variant="tertiary"
                                 disabled
-                                className="w-[108px] border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-0 py-2 rounded-lg"
+                                className="w-[108px] border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-2 py-2 rounded-lg"
                                 style={{ fontFamily: "var(--font-press-start)" }}
                             >
                                 Redeem
