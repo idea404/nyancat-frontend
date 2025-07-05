@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, LiveFeedback } from "@worldcoin/mini-apps-ui-kit-react";
-import { MiniKit } from "@worldcoin/minikit-js";
+import { MiniKit, ResponseEvent, Network } from "@worldcoin/minikit-js";
 import { useWaitForTransactionReceipt } from "@worldcoin/minikit-react";
 import { useState, useEffect } from "react";
 import { createPublicClient, http, erc20Abi } from "viem";
@@ -74,39 +74,71 @@ export const MintButton = () => {
       const assets = (100 * 10 ** 6).toString(); // 100 USDC with 6 decimals
       const receiver = (session?.user.walletAddress ?? "0x0000000000000000000000000000000000000000") as `0x${string}`;
 
-      const { finalPayload } = await MiniKit.commandsAsync.sendTransaction({
-        transaction: [
-          // 1. Approve vault to spend 100 USDC
-          {
-            address: USDC_ADDRESS,
-            abi: erc20Abi,
-            functionName: "approve",
-            args: [VAULT_ADDRESS, assets],
-          },
-          // 2. Call deposit on the vault
-          {
-            address: VAULT_ADDRESS,
-            abi: VaultAbi,
-            functionName: "deposit",
-            args: [assets, receiver],
-          },
-        ],
-      });
+      if (DEMO_MODE) {
+        // ---------------------------------------------
+        // DEMO FLOW: use signMessage so the user still signs something,
+        // then emit a synthetic MiniAppSendTransaction success event so
+        // downstream hooks behave as if a tx was submitted.
+        // ---------------------------------------------
+        const msg = `Demo deposit of 100 USDC to vault ${VAULT_ADDRESS}`;
+        const { finalPayload } = await MiniKit.commandsAsync.signMessage({ message: msg });
 
-      if (finalPayload.status === "success") {
-        if (DEMO_MODE) {
-          // In demo mode we skip waiting for the on-chain receipt and mark success immediately
-          console.log("[DEMO] Tx simulated, id:", finalPayload.transaction_id);
+        if (finalPayload.status === "success") {
+          // Craft a fake transaction id (64-byte hex)
+          const txId = `0x${crypto.randomUUID().replace(/-/g, "").padEnd(64, "0")}` as `0x${string}`;
+
+          // Notify listeners (e.g., useWaitForTransactionReceipt) manually
+          MiniKit.trigger(ResponseEvent.MiniAppSendTransaction, {
+            status: "success",
+            transaction_status: "submitted",
+            transaction_id: txId,
+            reference: "demo-ref",
+            from: receiver,
+            chain: Network.WorldChain,
+            timestamp: new Date().toISOString(),
+            version: 1,
+          });
+
+          // Update UI
+          setTransactionId(txId);
           setButtonState("success");
           setTimeout(() => setButtonState(undefined), 3000);
         } else {
-          console.log("Tx submitted, id:", finalPayload.transaction_id);
-          setTransactionId(finalPayload.transaction_id);
+          console.error("[DEMO] signMessage failed", finalPayload);
+          setButtonState("failed");
+          setTimeout(() => setButtonState(undefined), 3000);
         }
       } else {
-        console.error("sendTransaction failed", finalPayload);
-        setButtonState("failed");
-        setTimeout(() => setButtonState(undefined), 3000);
+        // ---------------------------------------------
+        // PRODUCTION FLOW: real on-chain transaction
+        // ---------------------------------------------
+        const { finalPayload } = await MiniKit.commandsAsync.sendTransaction({
+          transaction: [
+            // 1. Approve vault to spend 100 USDC
+            {
+              address: USDC_ADDRESS,
+              abi: erc20Abi,
+              functionName: "approve",
+              args: [VAULT_ADDRESS, assets],
+            },
+            // 2. Call deposit on the vault
+            {
+              address: VAULT_ADDRESS,
+              abi: VaultAbi,
+              functionName: "deposit",
+              args: [assets, receiver],
+            },
+          ],
+        });
+
+        if (finalPayload.status === "success") {
+          console.log("Tx submitted, id:", finalPayload.transaction_id);
+          setTransactionId(finalPayload.transaction_id);
+        } else {
+          console.error("sendTransaction failed", finalPayload);
+          setButtonState("failed");
+          setTimeout(() => setButtonState(undefined), 3000);
+        }
       }
     } catch (err) {
       console.error("Error sending transaction", err);
