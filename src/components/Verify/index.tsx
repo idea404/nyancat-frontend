@@ -30,6 +30,9 @@ export const Verify = () => {
     // Verify the proof
     const response = await fetch(`https://developer.worldcoin.org/api/v2/verify/${process.env.NEXT_PUBLIC_APP_ID}`, {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         nullifier_hash: result.finalPayload.nullifier_hash,
         merkle_root: result.finalPayload.merkle_root,
