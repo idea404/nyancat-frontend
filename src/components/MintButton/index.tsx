@@ -13,8 +13,8 @@ import VaultAbi from "@/abi/USDvyVault.json";
  * USDC token address and Vault contract address.
  * You can set these via NEXT_PUBLIC env vars so they are available at build/runtime.
  */
-const USDC_ADDRESS = (process.env.NEXT_PUBLIC_USDC_ADDRESS ?? "0xUSDC_ADDRESS_HERE") as `0x${string}`;
-const VAULT_ADDRESS = (process.env.NEXT_PUBLIC_VAULT_ADDRESS ?? "0xVAULT_ADDRESS_HERE") as `0x${string}`;
+const USDC_ADDRESS = (process.env.NEXT_PUBLIC_USDC_ADDRESS ?? "0xUSDC_ADDRESS_HERE") as `0x${string}`; // TODO
+const VAULT_ADDRESS = (process.env.NEXT_PUBLIC_VAULT_ADDRESS ?? "0xVAULT_ADDRESS_HERE") as `0x${string}`; // TODO
 // Flag that allows us to short-circuit on-chain confirmations (demo/stub mode)
 const DEMO_MODE = true;
 
@@ -99,8 +99,7 @@ export const MintButton = () => {
             version: 1,
           });
 
-          // Update UI
-          setTransactionId(txId);
+          // Update UI – skip polling in demo mode
           setButtonState("success");
           setTimeout(() => setButtonState(undefined), 3000);
         } else {
