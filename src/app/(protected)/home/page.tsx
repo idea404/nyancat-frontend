@@ -17,6 +17,28 @@ export default function Home() {
     // Determine if the user has deposited yet
     const isZeroBalance = balance === 0;
 
+    // Hard-coded degen news messages the cat can say
+    const degenNews = [
+        "$PEPE has been all over X today, 6 whales bought in and trading is starting to slow... It would be a shame if the price would start tanking soon...",
+        "Rumour has it $DOGE options expiring tomorrow could send it to the moon – or the crater. Choose wisely, anon.",
+        "$SOL racked up 300k failed TPS again. Maybe it's time for a break-even exit?",
+        "Three wallets just swept the entire CrypToadz floor. Frogs incoming?",
+        "Funding flipped negative on $ETH perp. Bears getting greedy…" 
+    ];
+
+    // Chat bubble state
+    const [showChat, setShowChat] = useState(false);
+    const [chatMessage, setChatMessage] = useState<string>("");
+
+    const openChat = () => {
+        // Pick a random message each time the cat is tapped
+        const random = degenNews[Math.floor(Math.random() * degenNews.length)];
+        setChatMessage(random);
+        setShowChat(true);
+    };
+
+    const closeChat = () => setShowChat(false);
+
     const incrementBalance = () => {
         setBalance((prev) => prev + 100);
         setShares((prev) => prev + 100);
@@ -111,6 +133,16 @@ export default function Home() {
                     {/* Buttons */}
                     <div className="flex gap-2 w-full max-w-xs mt-4 justify-center">
                         <DepositButton onSuccess={incrementBalance} />
+
+                        {/* Degen-news cat button */}
+                        <button
+                            onClick={openChat}
+                            className="rounded-full border-2 border-[var(--foreground)] p-1 bg-[var(--background)] flex items-center justify-center"
+                            style={{ width: 56, height: 56 }}
+                        >
+                            <Player src="/menu.json" autoplay loop style={{ width: 48, height: 48 }} />
+                        </button>
+
                         <div className="flex-1">
                             <Button
                                 size="lg"
@@ -124,6 +156,22 @@ export default function Home() {
                         </div>
                     </div>
                 </Page.Main>
+            )}
+
+            {/* Pixel-style chat bubble overlay */}
+            {showChat && (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="relative bg-[var(--background)] border-4 border-[var(--foreground)] p-4 max-w-sm mx-4 pointer-events-auto" style={{ fontFamily: "var(--font-press-start)" }}>
+                        <button
+                            onClick={closeChat}
+                            className="absolute -top-3 -right-3 bg-[var(--foreground)] text-[var(--background)] px-2 py-1 leading-none text-xs"
+                            style={{ fontFamily: "var(--font-press-start)" }}
+                        >
+                            X
+                        </button>
+                        <p className="text-xs leading-relaxed" style={{ wordBreak: "break-word" }}>{chatMessage}</p>
+                    </div>
+                </div>
             )}
         </>
     );
