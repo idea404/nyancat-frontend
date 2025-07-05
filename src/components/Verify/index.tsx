@@ -28,20 +28,27 @@ export const Verify = () => {
     });
     console.log(result.finalPayload);
     // Verify the proof
-    const verifyUrl = `https://developer.worldcoin.org/api/v2/verify/${process.env.NEXT_PUBLIC_APP_ID}`;
+    const appId = process.env.NEXT_PUBLIC_APP_ID;
+    console.log('NEXT_PUBLIC_APP_ID:', appId);
+    const verifyUrl = `https://developer.worldcoin.org/api/v2/verify/${appId}`;
     console.log('Verifying with URL:', verifyUrl);
+
+    const requestBody = {
+      nullifier_hash: result.finalPayload.nullifier_hash,
+      merkle_root: result.finalPayload.merkle_root,
+      proof: result.finalPayload.proof,
+      verification_level: result.finalPayload.verification_level,
+      action: 'verify',
+    };
+
+    console.log('Request Body before stringify:', requestBody);
+
     const response = await fetch(verifyUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        nullifier_hash: result.finalPayload.nullifier_hash,
-        merkle_root: result.finalPayload.merkle_root,
-        proof: result.finalPayload.proof,
-        verification_level: result.finalPayload.verification_level,
-        action: 'verify',
-      }),
+      body: JSON.stringify(requestBody),
     });
 
     const data = await response.json();
