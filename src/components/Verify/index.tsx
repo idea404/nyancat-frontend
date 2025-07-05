@@ -28,7 +28,9 @@ export const Verify = () => {
     });
     console.log(result.finalPayload);
     // Verify the proof
-    const response = await fetch(`https://developer.worldcoin.org/api/v2/verify/${process.env.NEXT_PUBLIC_APP_ID}`, {
+    const verifyUrl = `https://developer.worldcoin.org/api/v2/verify/${process.env.NEXT_PUBLIC_APP_ID}`;
+    console.log('Verifying with URL:', verifyUrl);
+    const response = await fetch(verifyUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
