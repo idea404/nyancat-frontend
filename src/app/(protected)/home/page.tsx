@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { Page } from "@/components/PageLayout";
 import { Marble, TopBar, Button } from "@worldcoin/mini-apps-ui-kit-react";
@@ -11,8 +11,22 @@ import MintButton from "@/components/MintButton";
 export default function Home() {
     const { data: session } = useSession();
     const [balance, setBalance] = useState<number>(0);
+    const [shares, setShares] = useState<number>(0);
 
-    const incrementBalance = () => setBalance((prev) => prev + 100);
+    const incrementBalance = () => {
+        setBalance((prev) => prev + 100);
+        setShares((prev) => prev + 100);
+    };
+
+    useEffect(() => {
+        if (shares === 0) return;
+
+        const interval = setInterval(() => {
+            setBalance((prev) => Number((prev * 1.01).toFixed(2)));
+        }, 2000);
+
+        return () => clearInterval(interval);
+    }, [shares]);
 
     const formatter = new Intl.NumberFormat("en-US", {
         style: "currency",
@@ -94,7 +108,7 @@ export default function Home() {
 
                     <h3 className="text-sm -mt-1 -mb-1">Your Balance</h3>
                     <div className="text-5xl md:text-6xl font-bold leading-tight -mt-1 -mb-1">{formatter.format(balance)}</div>
-                    <p className="text-xs -mt-1 mb-2 opacity-80">{balance.toLocaleString()} vyShares</p>
+                    <p className="text-xs -mt-1 mb-2 opacity-80">{shares.toLocaleString()} vyShares</p>
 
                     <div className="text-4xl font-bold leading-tight mt-2 -mb-1">42.69%</div>
                     <p className="text-xs -mt-1">YTD Return</p>
