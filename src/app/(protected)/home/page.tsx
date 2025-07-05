@@ -130,30 +130,32 @@ export default function Home() {
                     <div className="text-4xl font-bold leading-tight mt-2 -mb-1">42.69%</div>
                     <p className="text-xs -mt-1">YTD Return</p>
 
-                    {/* Buttons */}
-                    <div className="flex gap-2 w-full max-w-xs mt-4 justify-center">
-                        <DepositButton onSuccess={incrementBalance} />
+                    {/* Buttons container with overlay cat */}
+                    <div className="relative w-full max-w-xs mt-4">
+                        <div className="flex gap-2 justify-center">
+                            <DepositButton onSuccess={incrementBalance} />
 
-                        {/* Degen-news cat button */}
+                            <div className="flex-1">
+                                <Button
+                                    size="lg"
+                                    variant="tertiary"
+                                    disabled
+                                    className="w-full border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-6 py-2 rounded-lg"
+                                    style={{ fontFamily: "var(--font-press-start)" }}
+                                >
+                                    Redeem
+                                </Button>
+                            </div>
+                        </div>
+
+                        {/* Degen-news cat button overlay */}
                         <button
                             onClick={openChat}
-                            className="rounded-full border-2 border-[var(--foreground)] p-1 bg-[var(--background)] flex items-center justify-center"
+                            className="absolute left-1/2 -translate-x-1/2 -top-8 rounded-full border-2 border-[var(--foreground)] bg-[var(--background)] flex items-center justify-center"
                             style={{ width: 56, height: 56 }}
                         >
                             <Player src="/menu.json" autoplay loop style={{ width: 48, height: 48 }} />
                         </button>
-
-                        <div className="flex-1">
-                            <Button
-                                size="lg"
-                                variant="tertiary"
-                                disabled
-                                className="w-full border-2 !bg-[var(--background)] !border-[var(--foreground)] !text-[var(--foreground)] font-[var(--font-press-start)] px-6 py-2 rounded-lg"
-                                style={{ fontFamily: "var(--font-press-start)" }}
-                            >
-                                Redeem
-                            </Button>
-                        </div>
                     </div>
                 </Page.Main>
             )}
