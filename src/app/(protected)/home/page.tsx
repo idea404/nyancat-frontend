@@ -45,7 +45,7 @@ export default function Home() {
             <Page.Header className="p-0 relative">
                 {isZeroBalance ? (
                     <Player
-                    className="absolute left-5 top-8"
+                    className="absolute left-5 top-1"
                       src="/nyan.json"   // lives in /public, so this path is fine
                       autoplay
                       loop
