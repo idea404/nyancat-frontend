@@ -21,27 +21,31 @@ export const Verify = () => {
   const onClickVerify = async (verificationLevel: VerificationLevel) => {
     setButtonState('pending');
     setWhichVerification(verificationLevel);
-    const result = await MiniKit.commandsAsync.verify({
+    const result: any = await MiniKit.commandsAsync.verify({ // types are outdated
       action: 'verify',
       verification_level: verificationLevel,
     });
     console.log(result.finalPayload);
     // Verify the proof
-    const response = await fetch('/api/verify-proof', {
+    const response = await fetch(`https://developer.worldcoin.org/api/v2/verify/${process.env.NEXT_PUBLIC_APP_ID}`, {
       method: 'POST',
       body: JSON.stringify({
-        payload: result.finalPayload,
-        action: 'test-action',
+        nullifier_hash: result.finalPayload.nullifier_hash,
+        merkle_root: result.finalPayload.merkle_root,
+        proof: result.finalPayload.proof,
+        verification_level: result.finalPayload.verification_level,
+        action: 'verify',
       }),
     });
 
     const data = await response.json();
     if (data.verifyRes.success) {
       setButtonState('success');
-      // Normally you'd do something here since the user is verified
+      console.log("yay it worked");
       // Here we'll just do nothing
     } else {
       setButtonState('failed');
+      console.log("merp I failed", result.finalPayload)
 
       // Reset the button state after 3 seconds
       setTimeout(() => {
