@@ -21,6 +21,7 @@ export const Verify = () => {
   const onClickVerify = async (verificationLevel: VerificationLevel) => {
     setButtonState('pending');
     setWhichVerification(verificationLevel);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const result: any = await MiniKit.commandsAsync.verify({ // types are outdated
       action: 'verify',
       verification_level: verificationLevel,
